@@ -39,7 +39,7 @@ TEST(LidarScanConversion, OnePixelAlongX) {
     std::memcpy(scan.data.data(), &r, sizeof(float));
 
     pcl::PCLPointCloud2 cloud;
-    ouster_ros::LidarScanToPointCloud(info, scan, cloud);
+    lidar_conversions::LidarScanToPointCloud(info, scan, cloud);
 
     ASSERT_EQ(cloud.width, 1u);
     ASSERT_EQ(cloud.height, 1u);
@@ -78,7 +78,7 @@ TEST(LidarScanConversion, Uint16MillimetersToMeters) {
     std::memcpy(scan.data.data(), &mm, sizeof(uint16_t));
 
     pcl::PCLPointCloud2 cloud;
-    ouster_ros::LidarScanToPointCloud(info, scan, cloud);
+    lidar_conversions::LidarScanToPointCloud(info, scan, cloud);
     float x;
     std::memcpy(&x, cloud.data.data(), 4);
     EXPECT_NEAR(x, 1.F, 1e-4);
@@ -113,9 +113,9 @@ TEST(LidarScanConversion, UnorganizedWidth) {
     }
 
     pcl::PCLPointCloud2 cloud;
-    ouster_ros::LidarScanToPointCloudOptions opts;
+    lidar_conversions::LidarScanToPointCloudOptions opts;
     opts.organized = false;
-    ouster_ros::LidarScanToPointCloud(info, scan, cloud, opts);
+    lidar_conversions::LidarScanToPointCloud(info, scan, cloud, opts);
     EXPECT_EQ(cloud.height, 1u);
     EXPECT_EQ(cloud.width, 4u);
 }
@@ -155,7 +155,7 @@ TEST(LidarScanConversion, PlanarTwoChannelsSecondIsRange) {
     std::memcpy(scan.data.data() + 1, &r, sizeof(float));
 
     pcl::PCLPointCloud2 cloud;
-    ouster_ros::LidarScanToPointCloud(info, scan, cloud);
+    lidar_conversions::LidarScanToPointCloud(info, scan, cloud);
     float x;
     std::memcpy(&x, cloud.data.data() + 0, sizeof(float));
     EXPECT_NEAR(x, 3.F, 1e-5);

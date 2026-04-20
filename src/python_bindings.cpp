@@ -107,12 +107,12 @@ py::tuple lidar_scan_to_pointcloud2_data(const py::object& info_py,
     const auto info = py_to_info(info_py);
     const auto scan = py_to_scan(scan_py);
 
-    ouster_ros::LidarScanToPointCloudOptions opts;
+    lidar_conversions::LidarScanToPointCloudOptions opts;
     opts.range_channel_name = range_channel_name;
     opts.organized = organized;
 
     pcl::PCLPointCloud2 cloud;
-    ouster_ros::LidarScanToPointCloud(info, scan, cloud, opts);
+    lidar_conversions::LidarScanToPointCloud(info, scan, cloud, opts);
 
     // py::bytes copies the buffer; the PCL cloud is destroyed on return so we
     // can't hand out a zero-copy view.
@@ -128,7 +128,7 @@ py::tuple lidar_scan_to_pointcloud2_data(const py::object& info_py,
 
 PYBIND11_MODULE(lidar_conversions_py, m) {
     m.doc() =
-        "Python bindings for ouster_ros::LidarScanToPointCloud. "
+        "Python bindings for lidar_conversions::LidarScanToPointCloud. "
         "Accepts rclpy LidarInfo / LidarScan objects and returns the raw "
         "float32 xyz buffer that the caller wraps in a sensor_msgs/PointCloud2.";
 

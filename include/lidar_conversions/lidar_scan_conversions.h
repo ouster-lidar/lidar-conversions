@@ -11,7 +11,7 @@
 
 #include <string>
 
-namespace ouster_ros {
+namespace lidar_conversions {
 
 struct LidarScanToPointCloudOptions {
     /// Channel name for range (case-insensitive match against LidarChannel.name).
@@ -39,4 +39,4 @@ void LidarScanToPointCloud(
     pcl::PCLPointCloud2& cloud_out,
     const LidarScanToPointCloudOptions& opts = {});
 
-}  // namespace ouster_ros
+}  // namespace lidar_conversions

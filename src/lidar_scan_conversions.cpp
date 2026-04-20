@@ -16,7 +16,7 @@
 #include <string>
 #include <vector>
 
-namespace ouster_ros {
+namespace lidar_conversions {
 
 namespace {
 
@@ -283,4 +283,4 @@ void LidarScanToPointCloud(const LidarInfo& info, const LidarScan& scan,
     cloud_out.is_dense = any_valid && !any_invalid;
 }
 
-}  // namespace ouster_ros
+}  // namespace lidar_conversions
